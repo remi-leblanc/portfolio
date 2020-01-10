@@ -85,7 +85,6 @@ $(document).ready(function(){
 	}
 	const router = new VueRouter({
 		mode: 'history',
-		base: '/portfolio/',
 		routes: [
 			{
 				path: '/project/lappin',
