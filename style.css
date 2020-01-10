@@ -1,0 +1,483 @@
+*{
+	box-sizing: border-box;
+	user-select: none;
+	cursor: none !important;
+}
+p, div, span, a{
+	font-family: 'Morganite';
+	letter-spacing: 0.1em;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 200;
+}
+a, span{
+	display: inline-block;
+}
+.bold{
+	font-weight: 700;
+}
+h1, h2, h3, h4, p{
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: inherit;
+}
+.button{
+	border: 1px solid #fff;
+	width: 180px;
+	padding: 5px 0;
+	font-size: 28px;
+	text-transform: uppercase;
+	text-align: center;
+}
+@keyframes grain{
+	0%, 100% { background-position: 50%, 50% }
+	10% { background-position: 50% 60% }
+	20% { background-position: 50% 10% }
+	30% { background-position: 50% -20% }
+	40% { background-position: 50% 80% }
+	50% { background-position: 50% 5% }
+	60% { background-position: 50% -50% }
+	70% { background-position: 50% -10% }
+	80% { background-position: 50% 30% }
+	90% { background-position: 50% -80% }
+}
+@keyframes fadeIn{
+	0%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
+
+
+
+html{
+	height: 100%;
+	user-select: none;
+}
+body{
+	position: relative;
+	margin: 0;
+	background: #000;
+	overflow-x: hidden;
+	box-sizing: border-box;
+}
+body::before{
+	content: "";
+	display: block;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: url('images/grain.png');
+	background-position: 50% 50%;
+	z-index: 1000;
+	pointer-events: none;
+	animation: grain 1s steps(1) infinite;
+}
+body::-webkit-scrollbar{
+	display: none;
+}
+header{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
+	padding: 25px;
+	overflow: hidden;
+}
+.header-inner{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#customAnimation{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	animation: 0.5s ease fadeIn forwards;
+}
+.redbar{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scaleX(0);
+	background: #e51717;
+	width: 600px;
+	height: 5px;
+	z-index: 0;
+}
+nav{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 110px;
+	width: 100vw;
+	transition: 0.5s ease;
+}
+.nav-inner{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	transform: translateX(0);
+	white-space: nowrap;
+	z-index: 10;
+	will-change: transform;
+	transform-origin: center;
+}
+.nav-item{
+	position: relative;
+	padding: 0 60px;
+	user-select: none;
+	-ms-user-select: none;
+	opacity: 0;
+	transition: 0.5s ease;
+	text-transform: uppercase;
+	will-change: opacity;
+}
+.navmode .nav-item{
+	opacity: 0.4;
+}
+.nav-item.selected{
+	opacity: 1;
+}
+.loading .nav-item.selected{
+	opacity: 0;
+	transform: scaleX(0);
+}
+.nav-item-inner{
+	position: relative;
+}
+.project-info{
+	position: absolute;
+	right: 0.3em;
+	top: 90%;
+	transform: translateY(-100%);
+	font-size: 28px;
+	text-transform: uppercase;
+	transition: 0.5s ease;
+	transform: translateY(-15px);
+	opacity: 0;
+}
+.nav-item.selected .project-info{
+	transform: translateY(0);
+	opacity: 1;
+}
+.navmode .nav-item.selected .project-info{
+	transform: translateY(-10px);
+	opacity: 0;
+}
+.button{
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	cursor: pointer;
+	opacity: 1;
+	transform: translateX(-50%) scaleX(1);
+	transition: 0.3s ease;
+	z-index: 15;
+}
+.navmode .button,
+.projectmode .button,
+.loading .button{
+	pointer-events: none;
+	opacity: 0;
+	transform: translateX(-50%) scaleX(0.1);
+}
+.border-link{
+	position: fixed;
+	text-transform: uppercase;
+	font-size: 28px;
+	padding: 0 15px;
+	transform: translateY(-50%);
+	z-index: 100;
+	pointer-events: none;
+	opacity: 0;
+	animation: 0.5s ease fadeIn forwards;
+}
+.loaded .border-link{
+	pointer-events: all;
+}
+.border-link.home{
+	top: 25px;
+	left: 35px;
+}
+.border-link.about{
+	top: 25px;
+	right: 35px;
+}
+
+
+.mouse{
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: 100;
+	opacity: 0;
+}
+.loaded .mouse{
+	z-index: 10;
+}
+.mouse-rect{
+	display: block;
+	height: 20px;
+	width: 20px;
+	border: 1px solid #fff;
+	transform-origin: center;
+	transform: rotate(45deg);
+	z-index: 10;
+	transition: 0.3s ease;
+	box-shadow: 0 0 3px rgba(0,0,0,0.1), inset 0 0 20px rgba(0,0,0,0.1);
+}
+.navmode .mouse-rect{
+	transform: rotate(45deg) scale(0.6);
+}
+
+.mouse .arrows{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform-origin: center;
+	transform: translate(-50%, -50%);
+	width: 40px;
+	overflow: visible;
+	transition: 0.3s ease 1s;
+}
+.mouse .arrows polygon{
+	fill: #e51717;
+	transition: 0.3s ease;
+}
+.projectmode .mouse .arrows{
+	transform: translate(-50%, -50%) rotate(90deg);
+}
+.mouse .left{
+	transform: translateX(-8px);
+}
+.mouse .right{
+	transform: translateX(8px);
+}
+.navmode .left{
+	transform: translateX(-25px);
+}
+.navmode .right{
+	transform: translateX(25px);
+}
+.mouse.hover .mouse-rect{
+	background: #e51717;
+	border-color: #e51717;
+	transform: rotate(45deg) scale(1.7);
+}
+.mouse.hover .left{
+	transform: translateX(0);
+}
+.mouse.hover .right{
+	transform: translateX(0);
+}
+.mouse-dot{
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: 150;
+	height: 2px;
+	width: 2px;
+	transform: translate(-50%, -50%);
+	background: #fff;
+	border-radius: 100%;
+	opacity: 0;
+}
+.loaded .mouse-dot{
+	z-index: 15;
+}
+.hover-magnet *{
+	pointer-events: none;
+}
+
+
+
+
+.photo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 450px;
+	overflow: hidden;
+	z-index: -1;
+	transition: width 2s cubic-bezier(0.770, 0.000, 0.175, 1.000), transform 0.3s ease, opacity 0s ease;
+}
+.photo::before{
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+.navmode .photo,
+.loading .photo{
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0.00001, 0.5);
+	transition: width 2s cubic-bezier(0.770, 0.000, 0.175, 1.000), transform 0.3s ease, opacity 0s ease 0.3s;
+}
+.projectmode .photo{
+	width: 100%;
+}
+.photo-bg{
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 100vh;
+	width: 100vw;
+	background-position: center;
+	background-size: cover;
+	transform-origin: center;
+	transform: translate(-50%, -50%) scale(1);
+	transition: 2s cubic-bezier(0.770, 0.000, 0.175, 1.000);
+}
+.photo-bg[data-project='lappin']{
+	background-image: url('images/pine-cone.jpg');
+}
+.photo-bg[data-project='praesto']{
+	background-image: url('images/praesto.jpg');
+}
+.photo-bg.selected{
+	display: block;
+}
+.projectmode .photo-bg{
+	transform: translate(-50%, -50%) scale(1.2);
+}
+
+.project{
+	position: relative;
+	display: none;
+	font-size: 30px;
+	padding-top: 50px;
+}
+.projectmode .project{
+	display: block;
+}
+.project-inner{
+	width: 100%;
+	max-width: 1024px;
+	padding: 0 50px;
+	margin: 0 auto;
+}
+
+.project .category{
+	margin-bottom: 40px;
+}
+.project .category h2{
+	text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+.project hr{
+	display: block;
+	border: none;
+	height: 1px;
+	background: #e51717;
+	margin-top: 0;
+	margin-bottom: 40px;
+}
+.project img{
+	width: 100%;
+	opacity: 0.8;
+	margin-bottom: 40px;
+	transition: 0.3s ease;
+}
+.project img:hover{
+	opacity: 1;
+}
+
+.control-tip{
+	position: absolute;
+	bottom: 40px;
+	left: 50%;
+	pointer-events: none;
+	transform: translateX(-50%);
+	font-size: 25px;
+	color: #fff;
+	opacity: 0;
+	white-space: nowrap;
+	transition: 0.3s ease;
+}
+.loaded .control-tip{
+	opacity: 0.3;
+}
+.navmode .control-tip,
+.transition .control-tip{
+	opacity: 0;
+}
+
+
+.loader{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	z-index: 100;
+}
+.loaded .loader{
+	display: none;
+}
+.loader-percent{
+	text-transform: uppercase;
+	font-size: 110px;
+	color: #fff;
+	z-index: 10;
+}
+.loader-bar{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #e51717;
+	width: 100vw;
+	height: 5px;
+}
+
+.go-to-top{
+	position: fixed;
+	bottom: 50px;
+	right: 55px;
+	height: 40px;
+	width: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transform: translateY(5px);
+	z-index: 15;
+	pointer-events: none;
+	transition: 0.5s ease;
+}
+.go-to-top.active{
+	transform: translateY(0);
+	opacity: 1;
+	pointer-events: all;
+}
+.go-to-top svg{
+	width: 100%;
+	height: 100%;
+}
+.go-to-top .path{
+	fill: none;
+	stroke:#fff;
+	stroke-miterlimit:10;
+}
