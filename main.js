@@ -5,10 +5,13 @@ $(document).ready(function(){
 	// VARS INIT
 	///////////////////////////////////
 
+	//Parameters
+	var maxLoop = 3;
+
+	//Global vars
 	var pageCenter = $(window).width() / 2;
 	var redbarWidth = $('.redbar').width();
 	var originMouseX = null;
-	var onDownNavTranslation = null;
 	var mouseX = 0;
 	var mouseY = 0;
 	var mouseOverlayWidth = $('.mouse').width();
@@ -21,14 +24,15 @@ $(document).ready(function(){
 	var mouseOverTarget = null;
 	var touchDevice = $('html').hasClass('mod_touchevents');
 	var borderSize = $('header').outerWidth() - $('header').width();
-	var maxLoop = 3;
 
+	//Nav vars
 	var navItems = $('.nav-item');
 	var selectedItem = $('.nav-item.selected');
 	var selectedPos = selectedItem.offset().left + (selectedItem.outerWidth() / 2);
 	var selectedProject = $('.nav-item.selected').attr('data-project');
 	var navItemsWidth = 0;
 	var currTranslation = 0;
+	var onDownNavTranslation = null;
 	
 
 	///////////////////////////////////
@@ -52,7 +56,7 @@ $(document).ready(function(){
 			$('body').removeClass('transition');
 		}, 2000);
 		setTimeout(function(){
-			$('.control-tip').text('explore');
+			$('.control-tip').text('drag');
 		}, 1000);
 	}
 
@@ -83,6 +87,9 @@ $(document).ready(function(){
 	const lappin = { template:
 		'#lappin-template',
 	}
+	const praesto = { template:
+		'#praesto-template',
+	}
 	const router = new VueRouter({
 		mode: 'history',
 		routes: [
@@ -92,11 +99,7 @@ $(document).ready(function(){
 			},
 			{
 				path: '/project/praesto',
-				component: lappin,
-			},
-			{
-				path: '/project/tesla',
-				component: lappin,
+				component: praesto,
 			},
 		]
 	});
@@ -107,16 +110,14 @@ $(document).ready(function(){
 
 	
 	// On load page mode
-	console.log(router.currentRoute);
-	if(router.currentRoute.matched[0]){
-		if (router.currentRoute.matched[0].path == '/project'){
-			var urlProject = router.currentRoute.path.substr(router.currentRoute.path.lastIndexOf('/') + 1);
-			$('.nav-item').removeClass('selected');
-			$('.nav-item[data-project='+urlProject+']').addClass('selected');
-			$(document).on('endLoad', function(){
-				setProjectMode();
-			});
-		}
+	if (router.currentRoute.path.split('/')[1] == 'project'){
+		var urlProject = router.currentRoute.path.split('/')[2];
+		selectedProject = urlProject;
+		$('.nav-item').removeClass('selected');
+		$('.nav-item[data-project='+urlProject+']').addClass('selected');
+		$(document).on('endLoad', function(){
+			setProjectMode();
+		});
 	}
 
 	router.afterEach(function(to, from){
@@ -160,7 +161,6 @@ $(document).ready(function(){
 
 	setTimeout(function(){
 		$('body').addClass('loading');
-		TweenMax.to('.loader-percent', 0.3, {scaleX: 0, opacity: 0});
 	}, 1000);
 	TweenMax.to('.loader-bar', 2, {scaleX: 0, ease: Power1.easeInOut, onComplete: function(){
 		$('body').removeClass('loading').addClass('loaded');
@@ -169,6 +169,54 @@ $(document).ready(function(){
 		$(document).trigger('endLoad');
 	}});
 
+
+
+	///////////////////////////////////
+	// BORDER
+	///////////////////////////////////
+
+	//Custom canvas init
+	var canvas = document.getElementById("customAnimation");
+	canvas.width = windowWidth * 2;
+	canvas.height = windowHeight * 2;
+	var borderCtx = canvas.getContext("2d");
+
+	//Canvas border drawing
+	borderCtx.beginPath();
+	borderCtx.lineWidth = "2";
+	borderCtx.strokeStyle = "#e51717";
+
+	//Left border
+	borderCtx.moveTo(borderSize, 30);
+	borderCtx.lineTo(borderSize, canvas.height - 30);
+
+	//Right border
+	borderCtx.moveTo(canvas.width - borderSize, 30);
+	borderCtx.lineTo(canvas.width - borderSize, canvas.height - 30);
+
+	//Top border
+	borderCtx.moveTo(30, borderSize);
+	borderCtx.lineTo(canvas.width - 30, borderSize);
+
+	//Bottom border
+	borderCtx.moveTo(30, canvas.height - borderSize);
+	borderCtx.lineTo(canvas.width - 30, canvas.height - borderSize);
+
+	borderCtx.stroke();
+
+	//Space for links in border
+	$('.border-link').each(function(){
+		var linkWidth = $(this).outerWidth() * 2;
+		var linkLeft = $(this).offset().left * 2;
+
+		borderCtx.beginPath();
+		borderCtx.lineWidth = "2";
+		borderCtx.strokeStyle = "#000";
+
+		borderCtx.clearRect(linkLeft, 49, linkWidth, 3);
+
+		borderCtx.stroke();
+	});
 
 
 	///////////////////////////////////
@@ -194,6 +242,10 @@ $(document).ready(function(){
 	centerSelected();
 
 
+
+	///////////////////////////////////
+	// NAV FUNCTIONS
+	///////////////////////////////////
 
 	function navMouseDown(e){
 		if(!$(e.target).hasClass('button') && !$(e.target).hasClass('border-link') && !$('body').hasClass('projectmode') && !loading){
@@ -273,56 +325,6 @@ $(document).ready(function(){
 
 
 	///////////////////////////////////
-	// BORDER
-	///////////////////////////////////
-
-	//Custom canvas init
-	var canvas = document.getElementById("customAnimation");
-	canvas.width = windowWidth * 2;
-	canvas.height = windowHeight * 2;
-	var borderCtx = canvas.getContext("2d");
-
-	//Canvas border drawing
-	borderCtx.beginPath();
-	borderCtx.lineWidth = "2";
-	borderCtx.strokeStyle = "#e51717";
-
-	//Left border
-	borderCtx.moveTo(borderSize, 30);
-	borderCtx.lineTo(borderSize, canvas.height - 30);
-
-	//Right border
-	borderCtx.moveTo(canvas.width - borderSize, 30);
-	borderCtx.lineTo(canvas.width - borderSize, canvas.height - 30);
-
-	//Top border
-	borderCtx.moveTo(30, borderSize);
-	borderCtx.lineTo(canvas.width - 30, borderSize);
-
-	//Bottom border
-	borderCtx.moveTo(30, canvas.height - borderSize);
-	borderCtx.lineTo(canvas.width - 30, canvas.height - borderSize);
-
-	borderCtx.stroke();
-
-	//Space for links in border
-	$('.border-link').each(function(){
-		var linkWidth = $(this).outerWidth() * 2;
-		var linkLeft = $(this).offset().left * 2;
-
-		borderCtx.beginPath();
-		borderCtx.lineWidth = "2";
-		borderCtx.strokeStyle = "#000";
-
-		borderCtx.clearRect(linkLeft, 49, linkWidth, 3);
-
-		borderCtx.stroke();
-	});
-
-
-
-
-	///////////////////////////////////
 	// EVENTS
 	///////////////////////////////////
 
@@ -394,7 +396,10 @@ $(document).ready(function(){
 
 
 
-	//Global nav animations loop
+	///////////////////////////////////
+	// ANIMATION LOOP
+	///////////////////////////////////
+
 	function navAnimation() {
 
 		//Get selected nav item
