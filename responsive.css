@@ -48,6 +48,7 @@
 	}
 	.border-link{
 		position: absolute;
+		transform: translateY(-50%);
 	}
 	.border-link.home{
 		left: 0;
