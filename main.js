@@ -94,12 +94,19 @@ $(document).ready(function(){
 		mode: 'history',
 		routes: [
 			{
+				path: '/',
+			},
+			{
 				path: '/project/lappin',
 				component: lappin,
 			},
 			{
 				path: '/project/praesto',
 				component: praesto,
+			},
+			{
+				name: '404',
+				path: '*',
 			},
 		]
 	});
@@ -108,9 +115,18 @@ $(document).ready(function(){
 		router: router
 	}).$mount('#app');
 
+	router.afterEach(function(to, from){
+		if(to.path == '/'){
+			removeProjectMode();
+		}
+	});
+
+	if (router.currentRoute.name == '404'){
+		router.push('/');
+	}
 	
 	// On load page mode
-	if (router.currentRoute.path.split('/')[1] == 'project'){
+	if (router.currentRoute.name !== '404' && router.currentRoute.path.split('/')[1] == 'project' && router.currentRoute.path.split('/')[2]){
 		var urlProject = router.currentRoute.path.split('/')[2];
 		selectedProject = urlProject;
 		$('.nav-item').removeClass('selected');
@@ -119,12 +135,6 @@ $(document).ready(function(){
 			setProjectMode();
 		});
 	}
-
-	router.afterEach(function(to, from){
-		if(to.path == '/'){
-			removeProjectMode();
-		}
-	});
 
 	$('.button').on('click', function(){
 		router.push('/project/'+selectedProject);
