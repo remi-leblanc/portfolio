@@ -26,7 +26,7 @@ h1, h2, h3, h4, p{
 	border: 1px solid #fff;
 	width: 180px;
 	padding: 5px 0;
-	font-size: 28px;
+	font-size: 35px;
 	text-transform: uppercase;
 	text-align: center;
 }
@@ -123,7 +123,7 @@ nav{
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	font-size: 110px;
+	font-size: 130px;
 	width: 100vw;
 	transition: 0.5s ease;
 }
@@ -165,7 +165,7 @@ nav{
 	right: 0.3em;
 	top: 90%;
 	transform: translateY(-100%);
-	font-size: 28px;
+	font-size: 35px;
 	text-transform: uppercase;
 	transition: 0.5s ease;
 	transform: translateY(-15px);
@@ -203,7 +203,7 @@ nav{
 .border-link{
 	position: fixed;
 	text-transform: uppercase;
-	font-size: 28px;
+	font-size: 35px;
 	padding: 0 15px;
 	transform: translateY(-50%) translateX(-50%);
 	z-index: 100;
@@ -221,7 +221,7 @@ nav{
 }
 .border-link.home{
 	top: 25px;
-	left: 95px;
+	left: 107px;
 }
 .border-link.about{
 	top: 25px;
@@ -362,6 +362,9 @@ nav{
 .photo-bg[data-project='praesto']{
 	background-image: url('images/praesto.jpg');
 }
+.photo-bg[data-project='studies']{
+	background-image: url('images/studies.jpg');
+}
 .photo-bg.selected{
 	display: block;
 }
@@ -369,10 +372,12 @@ nav{
 	transform: translate(-50%, -50%) scale(1.2);
 }
 
+
+
 .project{
 	position: relative;
 	display: none;
-	font-size: 30px;
+	font-size: 35px;
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
@@ -403,6 +408,10 @@ nav{
 	margin-top: 0;
 	margin-bottom: 10px;
 }
+.project p{
+	text-align: justify;
+	opacity: 0.85;
+}
 .project .category{
 	margin-bottom: 40px;
 }
@@ -430,7 +439,7 @@ nav{
 	left: 50%;
 	pointer-events: none;
 	transform: translateX(-50%);
-	font-size: 25px;
+	font-size: 30px;
 	color: #fff;
 	opacity: 0;
 	white-space: nowrap;
@@ -463,7 +472,7 @@ nav{
 }
 .loader-percent{
 	text-transform: uppercase;
-	font-size: 110px;
+	font-size: 130px;
 	color: #fff;
 	z-index: 10;
 	white-space: nowrap;

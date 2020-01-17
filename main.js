@@ -90,6 +90,9 @@ $(document).ready(function(){
 	const praesto = { template:
 		'#praesto-template',
 	}
+	const studies = { template:
+		'#studies-template',
+	}
 	const router = new VueRouter({
 		mode: 'history',
 		routes: [
@@ -103,6 +106,10 @@ $(document).ready(function(){
 			{
 				path: '/project/praesto',
 				component: praesto,
+			},
+			{
+				path: '/project/studies',
+				component: studies,
 			},
 			{
 				name: '404',
@@ -122,7 +129,7 @@ $(document).ready(function(){
 	});
 
 	if (router.currentRoute.name == '404'){
-		router.push('/');
+		router.replace('/');
 	}
 	
 	// On load page mode
