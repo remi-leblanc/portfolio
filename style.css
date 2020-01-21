@@ -26,7 +26,7 @@ h1, h2, h3, h4, p{
 	border: 1px solid #fff;
 	width: 180px;
 	padding: 5px 0;
-	font-size: 35px;
+	font-size: 30px;
 	text-transform: uppercase;
 	text-align: center;
 }
@@ -165,7 +165,7 @@ nav{
 	right: 0.3em;
 	top: 90%;
 	transform: translateY(-100%);
-	font-size: 35px;
+	font-size: 30px;
 	text-transform: uppercase;
 	transition: 0.5s ease;
 	transform: translateY(-15px);
@@ -203,7 +203,7 @@ nav{
 .border-link{
 	position: fixed;
 	text-transform: uppercase;
-	font-size: 35px;
+	font-size: 30px;
 	padding: 0 15px;
 	transform: translateY(-50%) translateX(-50%);
 	z-index: 100;
