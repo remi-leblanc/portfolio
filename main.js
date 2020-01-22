@@ -67,6 +67,7 @@ $(document).ready(function(){
 	function centerSelected(){
 		getSelected();
 		TweenMax.to('.nav-inner', 0, {x:pageCenter - selectedPos});
+		console.log('oui');
 	}
 
 	function getCurrTranslation(){
