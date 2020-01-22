@@ -63,12 +63,10 @@ $(window).on('load', function() {
 	function getSelected(){
 		selectedItem = $('.nav-item.selected');
 		selectedPos = selectedItem.offset().left + (selectedItem.outerWidth() / 2);
-		console.log(selectedItem);
 	}
 	function centerSelected(){
 		getSelected();
 		TweenMax.to('.nav-inner', 0, {x:pageCenter - selectedPos});
-		console.log(selectedPos);
 	}
 
 	function getCurrTranslation(){

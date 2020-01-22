@@ -42,14 +42,6 @@ h1, h2, h3, h4, p{
 	80% { background-position: 50% 30% }
 	90% { background-position: 50% -80% }
 }
-@keyframes fadeIn{
-	0%{
-		opacity: 0;
-	}
-	100%{
-		opacity: 1;
-	}
-}
 
 
 
@@ -105,8 +97,12 @@ header{
 	height: 100vh;
 	z-index: 100;
 	opacity: 0;
+	transition: 0.5s ease;
 	pointer-events: none;
-	animation: 0.5s ease fadeIn forwards;
+}
+.loading #customAnimation,
+.loaded #customAnimation{
+	opacity: 1;
 }
 .redbar{
 	position: absolute;
@@ -209,19 +205,23 @@ nav{
 	z-index: 100;
 	pointer-events: none;
 	opacity: 0;
-	animation: 0.5s ease fadeIn forwards;
-	transition: 0.8s ease;
+	transition: letter-spacing 0.8s ease, opacity 0.5s ease;
 }
 .border-link:hover{
 	letter-spacing: 0.13em;
 	transition: 0.8s ease;
 }
+.loading .border-link{
+	opacity: 1;
+	pointer-events: all;
+}
 .loaded .border-link{
+	opacity: 1;
 	pointer-events: all;
 }
 .border-link.home{
 	top: 25px;
-	left: 107px;
+	left: 100px;
 }
 .border-link.about{
 	top: 25px;
