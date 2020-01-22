@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(window).on('load', function() {
 
 	
 	///////////////////////////////////
@@ -173,11 +173,9 @@ $(document).ready(function(){
 
 	$('body').removeClass('start');
 
-	$(window).on('load', function() {
-		setTimeout(function(){
-			$('html, body').scrollTop(0);
-		}, 0);
-	});
+	setTimeout(function(){
+		$('html, body').scrollTop(0);
+	}, 0);
 
 	setTimeout(function(){
 		$('body').addClass('loading');
