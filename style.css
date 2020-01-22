@@ -479,7 +479,7 @@ nav{
 	transition: all 0.3s ease, letter-spacing 2s cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 .start .loader-percent{
-	letter-spacing: 1em;
+	letter-spacing: 0.8em;
 }
 .loading .loader-percent{
 	opacity: 0;
