@@ -13,10 +13,10 @@ $(window).on('load', function() {
 	var pageCenter = $(window).width() / 2;
 	var redbarWidth = $('.redbar').width();
 	var originMouseX = null;
-	var mouseX = 0;
-	var mouseY = 0;
-	var mouseOverlayWidth = 0;
-	var mouseOverlayHeight = 0;
+	var mouseX = null;
+	var mouseY = null;
+	var mouseOverlayWidth = $('.mouse').width();
+	var mouseOverlayHeight = $('.mouse').height();
 	var windowWidth = $(window).width();
 	var windowHeight = $(window).height();
 	var loading = true;
@@ -25,6 +25,7 @@ $(window).on('load', function() {
 	var mouseOverTarget = null;
 	var touchDevice = $('html').hasClass('mod_touchevents');
 	var borderSize = $('header').outerWidth() - $('header').width();
+	var mouseDetected = false;
 
 	//Nav vars
 	var navItems = $('.nav-item');
@@ -34,11 +35,7 @@ $(window).on('load', function() {
 	var navItemsWidth = 0;
 	var currTranslation = 0;
 	var onDownNavTranslation = null;
-	
-	$(document).on('endLoad', function(){
-		mouseOverlayWidth = $('.mouse').width();
-		mouseOverlayHeight = $('.mouse').height();
-	});
+
 
 	///////////////////////////////////
 	// GLOBAL FUNCTIONS
@@ -61,7 +58,7 @@ $(window).on('load', function() {
 			$('body').removeClass('transition');
 		}, 2000);
 		setTimeout(function(){
-			$('.control-tip').text('drag');
+			$('.control-tip').text('hold mouse');
 		}, 1000);
 	}
 
@@ -193,18 +190,6 @@ $(window).on('load', function() {
 		$(document).trigger('endLoad');
 		loading = false;
 	}});
-
-	var mouseLoader = setInterval(function(){
-		var stage = parseFloat($('.mouse').attr('data-loader'));
-		if(stage == 4){
-			$('.mouse').attr('data-loader', "0");
-		}
-		else{
-			$('.mouse').attr('data-loader', stage + 1);
-		}
-	}, 500);
-
-
 
 	///////////////////////////////////
 	// BORDER
@@ -390,6 +375,11 @@ $(window).on('load', function() {
 		$(document).mousemove(function(e){
 			mouseX = e.pageX;
 			mouseY = e.pageY - $(window).scrollTop();
+			if(!mouseDetected){
+				TweenMax.to('.mouse', 0, {xPercent: -50, yPercent: -50, x: (mouseX) - (windowWidth / 2), y: (mouseY) - (windowHeight / 2)});
+				TweenMax.to('.mouse', 0.3, {scale: 1});
+				mouseDetected = true;
+			}
 		});
 
 		//Get hover target on specific element
@@ -480,7 +470,9 @@ $(window).on('load', function() {
 			TweenMax.to('.mouse', 0.3, {xPercent: -50, yPercent: -50, x: (mouseOverTarget.offset().left + mouseOverTarget.outerWidth() / 2) - (windowWidth / 2), y: (mouseOverTarget.offset().top + mouseOverTarget.outerHeight() / 2) - (windowHeight / 2) - $(window).scrollTop()});
 		}
 		else{
-			TweenMax.to('.mouse', 0.3, {xPercent: -50, yPercent: -50, x: (mouseX) - (windowWidth / 2), y: (mouseY) - (windowHeight / 2)});
+			if(mouseDetected){
+				TweenMax.to('.mouse', 0.3, {xPercent: -50, yPercent: -50, x: (mouseX) - (windowWidth / 2), y: (mouseY) - (windowHeight / 2)});
+			}
 		}
 		TweenMax.to('.mouse-dot', 0, {x: mouseX - 1, y: mouseY - 1});
 		
