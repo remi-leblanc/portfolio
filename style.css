@@ -236,11 +236,11 @@ nav{
 
 .mouse{
 	position: fixed;
-	top: 0;
-	left: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	pointer-events: none;
 	z-index: 100;
-	opacity: 0;
 }
 .loaded .mouse{
 	z-index: 10;
@@ -260,6 +260,7 @@ nav{
 	transform: rotate(45deg) scale(0.6);
 }
 
+
 .mouse .arrows{
 	position: absolute;
 	top: 50%;
@@ -270,8 +271,10 @@ nav{
 	overflow: visible;
 	transition: 0.3s ease 1s;
 }
-.mouse .arrows polygon{
-	fill: #e51717;
+.mouse .arrows polyline{
+	fill: none;
+	stroke: #e51717;
+	stroke-width: 3%;
 	transition: 0.3s ease;
 }
 .projectmode .mouse .arrows{
@@ -312,10 +315,6 @@ nav{
 	transform: translate(-50%, -50%);
 	background: #fff;
 	border-radius: 100%;
-	opacity: 0;
-}
-.loaded .mouse-dot{
-	z-index: 15;
 }
 .hover-magnet *{
 	pointer-events: none;
@@ -367,6 +366,9 @@ nav{
 .photo-bg[data-project='praesto']{
 	background-image: url('images/praesto.jpg');
 }
+.photo-bg[data-project='kronawak']{
+	background-image: url('images/kronawak.jpg');
+}
 .photo-bg[data-project='studies']{
 	background-image: url('images/studies.jpg');
 }
@@ -406,7 +408,10 @@ nav{
 .project img{
 	width: 100%;
 	margin-bottom: 40px;
-	transition: 0.3s ease;
+}
+.project video{
+	width: 100%;
+	margin-bottom: 40px;
 }
 .project h2{
 	text-transform: uppercase;

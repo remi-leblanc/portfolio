@@ -30,6 +30,12 @@
 						<span class="project-info">branding<span class="bold">2019</span></span>
 					</div>
 				</div>
+				<div class="nav-item" data-loop=0 data-project="kronawak">
+					<div class="nav-item-inner">
+						<span>Kro<span class="bold">Nawak</span></span>
+						<span class="project-info">Motion Design<span class="bold">2018</span></span>
+					</div>
+				</div>
 				<div class="nav-item" data-loop=0 data-project="studies">
 					<div class="nav-item-inner">
 						<span>Stud<span class="bold">ies</span></span>
@@ -42,6 +48,7 @@
 		<div class="photo">
 			<span class="photo-bg selected" data-project="lappin"></span>
 			<span class="photo-bg selected" data-project="praesto"></span>
+			<span class="photo-bg selected" data-project="kronawak"></span>
 			<span class="photo-bg selected" data-project="studies"></span>
 		</div>
 		<span class="button hover-magnet">explore</span>
@@ -63,11 +70,11 @@
 	<canvas id="customAnimation"></canvas>
 
 	<span class="mouse-dot"></span>
-	<div class="mouse">
+	<div class="mouse" data-loader="0">
 		<span class="mouse-rect"></span>
 		<svg class="arrows" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 20.5" style="enable-background:new 0 0 50 20.5;" xml:space="preserve">
-			<polygon class="left" points="10.3,20.5 0,10.3 10.3,0 11,0.7 1.4,10.3 11,19.8"/>
-			<polygon class="right" points="39.7,20.5 39,19.8 48.6,10.3 39,0.7 39.7,0 50,10.3"/>
+			<polyline class="left" points="10.3,20.5 0,10.3 10.3,0"/>
+			<polyline class="right" points="39.7,0 50,10.3 39.7,20.5"/>
 		</svg>
 	</div>
 
@@ -122,6 +129,7 @@
 			</div>
 			<hr/>
 			<img src="images/lappin-card-mockup.jpg" alt=""/>
+			<hr/>
 			<div class="category">
 				<h2>Credits</h2>
 				<p>Rémi Leblanc</p>
@@ -157,6 +165,48 @@
 				<img src="images/praesto-typo-02.jpg" alt=""/>
 			</div>
 			<img src="images/praesto-card-mockup.jpg" alt=""/>
+			<hr/>
+			<div class="category">
+				<h2>Credits</h2>
+				<p>Rémi Leblanc</p>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/x-template" id="kronawak-template">
+		<div class="project-inner">
+			<div class="category">
+				<h2>Company</h2>
+				<p>Myself</p>
+			</div>
+			<div class="category">
+				<h2>Date</h2>
+				<p>September 2020</p>
+			</div>
+			<div class="category">
+				<h2>Services</h2>
+				<p>Branding</p>
+				<p>Motion Design</p>
+			</div>
+			<div class="category">
+				<h2>Synopsis</h2>
+				<p>This is a personnal project for some live streams on Twitch (twitch.tv/kronawak), I made a complete branding based on my name, in a medieval universe with a cartoon style. Then I animated the logo for some screens and transistions. Oh and there is this 3D break screen that I really love.</p>
+			</div>
+			<hr/>
+			<img src="images/kronawak-logo-01.jpg" alt=""/>
+			<img src="images/kronawak-logo-02.jpg" alt=""/>
+			<img src="images/kronawak-logo-03.jpg" alt=""/>
+			<hr/>
+			<video autoplay loop muted>
+				<source src="images/kronawak-video-01.mp4" type="video/mp4">
+			</video>
+			<video autoplay loop muted>
+				<source src="images/kronawak-video-02.mp4" type="video/mp4">
+			</video>
+			<video autoplay loop muted>
+				<source src="images/kronawak-video-03.mp4" type="video/mp4">
+			</video>
+			<hr/>
 			<div class="category">
 				<h2>Credits</h2>
 				<p>Rémi Leblanc</p>
@@ -200,6 +250,7 @@
 				<h2>Low poly city</h2>
 				<img src="images/studies-city.jpg" alt=""/>
 			</div>
+			<hr/>
 			<div class="category">
 				<h2>Credits</h2>
 				<p>Rémi Leblanc</p>
